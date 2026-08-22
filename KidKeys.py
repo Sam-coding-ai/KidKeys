@@ -1,3 +1,6 @@
+# Copyright (c) 2026 Github: Sam-coding-ai and @kidkeysofficial. All Rights Reserved.
+# Unauthorized copying, commercial distribution, or removal of attribution is strictly prohibited.
+
 from pynput import mouse, keyboard
 from pynput.keyboard import Controller, Key, KeyCode
 from PIL import Image, ImageDraw
@@ -10,6 +13,8 @@ import subprocess
 import sys
 import os
 import threading
+import webbrowser
+import tkinter as tk
 
 # Try importing plyer for native Windows Toast Notifications
 try:
@@ -58,7 +63,10 @@ def create_fallback_icon():
     return img
 
 def show_toast_notification():
-    """Slides a 3-second auto-dismiss Toast Notification on launch."""
+    """Slides a 5-second auto-dismiss Toast Notification on launch."""
+    # Give Windows time to fully load the system tray icon first
+    time.sleep(2)
+    
     title = "KidKeys — Toddler Locker Active"
     message = "Running in background!\n• LOCK: Tap CAPS LOCK 3x\n• UNLOCK: Tap CAPS LOCK 5x"
 
@@ -68,7 +76,7 @@ def show_toast_notification():
                 title=title,
                 message=message,
                 app_name="KidKeys",
-                timeout=3
+                timeout=5
             )
             return
         except Exception:
@@ -80,6 +88,39 @@ def show_toast_notification():
             tray_icon.notify(message, title)
         except Exception:
             pass
+
+def subscribe_action(icon, item):
+    """Opens the official Telegram community in the default web browser."""
+    webbrowser.open("https://t.me/kidkeysofficial")
+
+def support_action(icon, item):
+    """Opens a Tkinter popup window with copyable crypto addresses."""
+    def show_popup():
+        root = tk.Tk()
+        root.title("Support KidKeys 💖")
+        root.geometry("450x260")
+        
+        # Center the window on the screen
+        root.eval('tk::PlaceWindow . center')
+        
+        lbl = tk.Label(root, text="KidKeys is 100% free! Support the developer:", font=("Helvetica", 10, "bold"), fg="navy")
+        lbl.pack(pady=10)
+        
+        # Use a Text widget so users can easily highlight and copy the addresses
+        txt = tk.Text(root, height=7, width=50, font=("Consolas", 10))
+        txt.insert(tk.END, "Bitcoin Address:\n16DYQP8LwdVGzcmNoWq6haUcsVUuUXMKY1\n\nEVM Address (USDT, USDC, ETH, BNB):\n0x0163613124b4e5027e4c2122e9e0cbd7fc773458")
+        txt.config(state=tk.DISABLED) # Read-only but still copyable
+        txt.pack(padx=10, pady=5)
+        
+        btn = tk.Button(root, text="Awesome, Thanks!", command=root.destroy, font=("Helvetica", 9, "bold"))
+        btn.pack(pady=10)
+        
+        # Bring to front
+        root.attributes('-topmost', True)
+        root.mainloop()
+        
+    # Run in a separate thread to prevent freezing the system tray icon
+    threading.Thread(target=show_popup, daemon=True).start()
 
 def exit_action(icon, item):
     """Safely stop listeners, re-enable touchpad if locked, and terminate."""
@@ -94,7 +135,7 @@ def exit_action(icon, item):
     os._exit(0)
 
 def setup_tray():
-    """Initializes the background System Tray icon."""
+    """Initializes the background System Tray icon with Support/Subscribe links."""
     global tray_icon
     ico_path = get_resource_path("padlock.ico")
     if os.path.exists(ico_path):
@@ -107,6 +148,10 @@ def setup_tray():
 
     menu = pystray.Menu(
         pystray.MenuItem("KidKeys Active", lambda: None, enabled=False),
+        pystray.Menu.SEPARATOR,
+        pystray.MenuItem("⭐ Subscribe (@kidkeysofficial)", subscribe_action),
+        pystray.MenuItem("💖 Support Developer", support_action),
+        pystray.Menu.SEPARATOR,
         pystray.MenuItem("Exit KidKeys", exit_action)
     )
     tray_icon = pystray.Icon("KidKeys", image, "KidKeys Toddler Locker", menu)
