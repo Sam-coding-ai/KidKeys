@@ -4,7 +4,7 @@ A lightweight Windows utility to lock keyboard and mouse input for toddlers.
 
 > *Save your sanity, your open tabs, and your unsaved work from tiny hands!*
 
-[![GitHub Release](https://img.shields.io/github/v/release/YOUR-USERNAME/KidKeys?include_prereleases=&sort=semver&color=blue&label=Download&style=for-the-badge)](https://github.com/YOUR-USERNAME/KidKeys/releases)
+[![GitHub Release](https://img.shields.io/github/v/release/Sam-coding-ai/KidKeys?include_prereleases=&sort=semver&color=blue&label=Download&style=for-the-badge)](https://github.com/Sam-coding-ai/KidKeys/releases)
 [![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg?style=for-the-badge)](https://www.gnu.org/licenses/lgpl-3.0)
 
 ---
