@@ -53,4 +53,4 @@ KidKeys is 100% free and open-source, but keeping tiny hands at bay takes late-n
 ---
 
 ### 📜 License
-Distributed under the **GNU Lesser General Public License v3.0**. See `LICENSE` for more information.
+Distributed under the **GNU Lesser General Public License v2.1**. See `LICENSE` for more information.
