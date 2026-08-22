@@ -36,47 +36,43 @@ var
   CloseBtn: TNewButton;
   HeaderLabel: TNewStaticText;
 begin
-  { UNIVERSAL FIX: Use TForm instead of TSetupForm }
   DonatePopup := TForm.Create(WizardForm);
   try
     DonatePopup.Caption := 'Support KidKeys 💖';
-    DonatePopup.ClientWidth := 440;
-    DonatePopup.ClientHeight := 280;
+    DonatePopup.ClientWidth := ScaleX(440);
+    DonatePopup.ClientHeight := ScaleY(280);
     DonatePopup.Position := poMainFormCenter;
     DonatePopup.BorderStyle := bsDialog;
     
-    { Engaging Header Text }
     HeaderLabel := TNewStaticText.Create(DonatePopup);
     HeaderLabel.Parent := DonatePopup;
-    HeaderLabel.Top := 15;
-    HeaderLabel.Left := 20;
-    HeaderLabel.Width := 400;
+    HeaderLabel.Top := ScaleY(15);
+    HeaderLabel.Left := ScaleX(20);
+    HeaderLabel.Width := ScaleX(400);
     HeaderLabel.WordWrap := True;
     HeaderLabel.Font.Style := [fsBold];
     HeaderLabel.Font.Color := clNavy;
     HeaderLabel.Caption := 'KidKeys is 100% free, but keeping tiny hands at bay takes late-night coding! 🍼💻 If this app saved your sanity, consider supporting the developer:';
     
-    { Copyable Crypto Addresses }
     DetailsBox := TNewMemo.Create(DonatePopup);
     DetailsBox.Parent := DonatePopup;
-    DetailsBox.SetBounds(20, 65, 400, 160);
+    DetailsBox.SetBounds(ScaleX(20), ScaleY(65), ScaleX(400), ScaleY(160));
     DetailsBox.ReadOnly := True;
     DetailsBox.WordWrap := True;
     DetailsBox.ScrollBars := ssVertical;
-    DetailsBox.Font.Name := 'Consolas'; { Monospace font for easy reading }
+    DetailsBox.Font.Name := 'Consolas'; 
     
     DetailsBox.Text := 'Bitcoin Address:' + #13#10 + 
                        '16DYQP8LwdVGzcmNoWq6haUcsVUuUXMKY1' + #13#10 + #13#10 + 
                        'EVM Address (USDT, USDC, ETH, BNB):' + #13#10 + 
                        '0x0163613124b4e5027e4c2122e9e0cbd7fc773458';
                        
-    { Friendly Close Button }
     CloseBtn := TNewButton.Create(DonatePopup);
     CloseBtn.Parent := DonatePopup;
-    CloseBtn.Width := 120;
-    CloseBtn.Height := 30;
+    CloseBtn.Width := ScaleX(120);
+    CloseBtn.Height := ScaleY(30);
     CloseBtn.Left := (DonatePopup.ClientWidth - CloseBtn.Width) div 2;
-    CloseBtn.Top := 235;
+    CloseBtn.Top := ScaleY(235);
     CloseBtn.Caption := 'Awesome, Thanks!';
     CloseBtn.Font.Style := [fsBold];
     CloseBtn.ModalResult := mrOk;
@@ -94,43 +90,39 @@ var
   CloseBtn: TNewButton;
   HeaderLabel: TNewStaticText;
 begin
-  { UNIVERSAL FIX: Use TForm instead of TSetupForm }
   SubPopup := TForm.Create(WizardForm);
   try
     SubPopup.Caption := 'Join the Magic ✨';
-    SubPopup.ClientWidth := 380;
-    SubPopup.ClientHeight := 215;
+    SubPopup.ClientWidth := ScaleX(380);
+    SubPopup.ClientHeight := ScaleY(215);
     SubPopup.Position := poMainFormCenter;
     SubPopup.BorderStyle := bsDialog;
     
-    { Engaging Header Text }
     HeaderLabel := TNewStaticText.Create(SubPopup);
     HeaderLabel.Parent := SubPopup;
-    HeaderLabel.Top := 15;
-    HeaderLabel.Left := 20;
-    HeaderLabel.Width := 340;
+    HeaderLabel.Top := ScaleY(15);
+    HeaderLabel.Left := ScaleX(20);
+    HeaderLabel.Width := ScaleX(340);
     HeaderLabel.WordWrap := True;
     HeaderLabel.Font.Style := [fsBold];
     HeaderLabel.Font.Color := clGreen;
     HeaderLabel.Caption := 'Don''t miss out on the magic! Join our Telegram family for the latest updates and to request new features. 🚀';
     
-    { Copyable Telegram Link }
     DetailsBox := TNewMemo.Create(SubPopup);
     DetailsBox.Parent := SubPopup;
-    DetailsBox.SetBounds(20, 75, 340, 85);
+    DetailsBox.SetBounds(ScaleX(20), ScaleY(75), ScaleX(340), ScaleY(85));
     DetailsBox.ReadOnly := True;
     DetailsBox.WordWrap := True;
     
     DetailsBox.Text := 'Copy this link to join our official community:' + #13#10 + #13#10 + 
                        'https://t.me/kidkeysofficial or search in telegram @kidkeysofficial ';
                        
-    { Friendly Close Button }
     CloseBtn := TNewButton.Create(SubPopup);
     CloseBtn.Parent := SubPopup;
-    CloseBtn.Width := 100;
-    CloseBtn.Height := 30;
+    CloseBtn.Width := ScaleX(100);
+    CloseBtn.Height := ScaleY(30);
     CloseBtn.Left := (SubPopup.ClientWidth - CloseBtn.Width) div 2;
-    CloseBtn.Top := 170;
+    CloseBtn.Top := ScaleY(170);
     CloseBtn.Caption := 'I''m In!';
     CloseBtn.Font.Style := [fsBold];
     CloseBtn.ModalResult := mrOk;
@@ -143,32 +135,29 @@ end;
 
 procedure InitializeWizard;
 begin
-  { The "Magical Quote" to draw their eyes downward }
   PromoLabel := TNewStaticText.Create(WizardForm);
   PromoLabel.Parent := WizardForm;
-  PromoLabel.Left := 15;
-  PromoLabel.Top := WizardForm.CancelButton.Top - 25;
+  PromoLabel.Left := ScaleX(15);
+  PromoLabel.Top := WizardForm.CancelButton.Top - ScaleY(25);
   PromoLabel.Caption := '✨ Did KidKeys save your sanity? Support the developer and join the community!';
-  PromoLabel.Font.Color := clNavy; { Highly visible, trustworthy blue }
+  PromoLabel.Font.Color := clNavy; 
   PromoLabel.Font.Style := [fsBold];
 
-  { Donate Button - Widened, Bolded, with Emoji }
   DonateButton := TNewButton.Create(WizardForm);
   DonateButton.Parent := WizardForm;
-  DonateButton.Left := 15;
+  DonateButton.Left := ScaleX(15);
   DonateButton.Top := WizardForm.CancelButton.Top;
-  DonateButton.Width := 150;
+  DonateButton.Width := ScaleX(150);
   DonateButton.Height := WizardForm.CancelButton.Height;
   DonateButton.Caption := '💖 Support Developer';
   DonateButton.Font.Style := [fsBold];
   DonateButton.OnClick := @DonateOnClick;
 
-  { Subscribe Button - Widened, Bolded, with Emoji }
   SubscribeButton := TNewButton.Create(WizardForm);
   SubscribeButton.Parent := WizardForm;
-  SubscribeButton.Left := DonateButton.Left + DonateButton.Width + 10;
+  SubscribeButton.Left := DonateButton.Left + DonateButton.Width + ScaleX(10);
   SubscribeButton.Top := WizardForm.CancelButton.Top;
-  SubscribeButton.Width := 140;
+  SubscribeButton.Width := ScaleX(140);
   SubscribeButton.Height := WizardForm.CancelButton.Height;
   SubscribeButton.Caption := '⭐ Get Updates';
   SubscribeButton.Font.Style := [fsBold];
