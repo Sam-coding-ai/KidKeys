@@ -216,7 +216,7 @@ def handle_press(key):
         if key == keyboard.Key.caps_lock:
             current_time = time.time()
             
-            if current_time - last_tap_time < 0.8:
+            if current_time - last_tap_time < 0.35:
                 trigger_tap_count += 1
             else:
                 trigger_tap_count = 1
@@ -231,11 +231,11 @@ def handle_press(key):
                     play_beep_async(1200, 150)
                     play_beep_async(1200, 150)
 
-                    # Fully kill Touchpad hardware & gestures
-                    set_touchpad_state(enable=False)
-                    
-                    # Clamp down physical input listeners
+                    # 1. Lock inputs INSTANTLY
                     switch_listeners()
+
+                    # 2. Disable Touchpad hardware in the background
+                    threading.Thread(target=set_touchpad_state, args=(False,), daemon=True).start()
             else:
                 if trigger_tap_count >= 5:
                     is_locked = False
@@ -243,11 +243,11 @@ def handle_press(key):
                     
                     play_beep_async(600, 300)
 
-                    # Lift input suppression first
+                    # 1. Unlock inputs INSTANTLY
                     switch_listeners()
-                    
-                    # Restore Touchpad hardware & gestures
-                    set_touchpad_state(enable=True)
+
+                    # 2. Restore Touchpad hardware in the background
+                    threading.Thread(target=set_touchpad_state, args=(True,), daemon=True).start()
     except Exception:
         pass
 
