@@ -33,7 +33,8 @@ Toddlers love imitating parents by smashing keyboards. One second of looking awa
 1. Head over to the **[Releases Page](https://github.com/Sam-coding-ai/KidKeys/releases)**.
 2. Download the latest `KidKeys_Setup.exe`.
 3. Run the installer—it takes less than 5 seconds and includes an optional desktop shortcut!
-
+4. Note: Make sure turn off all Sticky Keys and Filter Keys. 
+   Path: Setting -> Accessibility -> Keyboard
 ---
 
 ### 🛠️ Built With
